@@ -18,3 +18,19 @@ spec:
         command: ["python", "-c", "from http.server import HTTPServer, SimpleHTTPRequestHandler; HTTPServer(('', 8000), SimpleHTTPRequestHandler).serve_forever()"]
         ports:
         - containerPort: 8000
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-service
+spec:
+  selector:
+    app: python-webapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
